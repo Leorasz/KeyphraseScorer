@@ -3,3 +3,4 @@ transformers
 bs4
 lxml
 pandas
+python-docx
