@@ -1,1 +1,37 @@
-{"weapon":{"facebook\/bart-large-mnli":0.2025047392,"MoritzLaurer\/deberta-v3-large-zeroshot-v1.1-all-33":0.9938157201,"MoritzLaurer\/xtremedistil-l6-h256-mnli-fever-anli-ling-binary":0.9927831292,"MoritzLaurer\/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7":0.0087687066,"MoritzLaurer\/DeBERTa-v3-large-mnli-fever-anli-ling-wanli":0.7788619399},"United States":{"facebook\/bart-large-mnli":0.029228637,"MoritzLaurer\/deberta-v3-large-zeroshot-v1.1-all-33":0.0000963578,"MoritzLaurer\/xtremedistil-l6-h256-mnli-fever-anli-ling-binary":0.0121740084,"MoritzLaurer\/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7":0.000384682,"MoritzLaurer\/DeBERTa-v3-large-mnli-fever-anli-ling-wanli":0.045219738},"plane":{"facebook\/bart-large-mnli":0.246512264,"MoritzLaurer\/deberta-v3-large-zeroshot-v1.1-all-33":0.9989563227,"MoritzLaurer\/xtremedistil-l6-h256-mnli-fever-anli-ling-binary":0.9963730574,"MoritzLaurer\/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7":0.9940536022,"MoritzLaurer\/DeBERTa-v3-large-mnli-fever-anli-ling-wanli":0.724585712},"dog":{"facebook\/bart-large-mnli":0.1077394336,"MoritzLaurer\/deberta-v3-large-zeroshot-v1.1-all-33":0.0011475233,"MoritzLaurer\/xtremedistil-l6-h256-mnli-fever-anli-ling-binary":0.0020319007,"MoritzLaurer\/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7":0.0650996491,"MoritzLaurer\/DeBERTa-v3-large-mnli-fever-anli-ling-wanli":0.4498089254},"weightlifting":{"facebook\/bart-large-mnli":0.4055331051,"MoritzLaurer\/deberta-v3-large-zeroshot-v1.1-all-33":0.0000312838,"MoritzLaurer\/xtremedistil-l6-h256-mnli-fever-anli-ling-binary":0.0032700519,"MoritzLaurer\/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7":0.000209344,"MoritzLaurer\/DeBERTa-v3-large-mnli-fever-anli-ling-wanli":0.1403797716}}
+{
+    "weapon": {
+        "facebook/bart-large-mnli": 0.2025047391653061,
+        "MoritzLaurer/deberta-v3-large-zeroshot-v1.1-all-33": 0.9938157200813293,
+        "MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary": 0.9927831292152405,
+        "MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7": 0.00876870658248663,
+        "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli": 0.778861939907074
+    },
+    "United States": {
+        "facebook/bart-large-mnli": 0.029228636994957924,
+        "MoritzLaurer/deberta-v3-large-zeroshot-v1.1-all-33": 9.635784226702526e-05,
+        "MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary": 0.012174008414149284,
+        "MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7": 0.0003846820327453315,
+        "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli": 0.04521973803639412
+    },
+    "plane": {
+        "facebook/bart-large-mnli": 0.2465122640132904,
+        "MoritzLaurer/deberta-v3-large-zeroshot-v1.1-all-33": 0.9989563226699829,
+        "MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary": 0.9963730573654175,
+        "MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7": 0.9940536022186279,
+        "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli": 0.7245857119560242
+    },
+    "dog": {
+        "facebook/bart-large-mnli": 0.10773943364620209,
+        "MoritzLaurer/deberta-v3-large-zeroshot-v1.1-all-33": 0.0011475232895463705,
+        "MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary": 0.0020319006871432066,
+        "MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7": 0.06509964913129807,
+        "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli": 0.44980892539024353
+    },
+    "weightlifting": {
+        "facebook/bart-large-mnli": 0.405533105134964,
+        "MoritzLaurer/deberta-v3-large-zeroshot-v1.1-all-33": 3.1283798307413235e-05,
+        "MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary": 0.003270051907747984,
+        "MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7": 0.00020934399799443781,
+        "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli": 0.14037977159023285
+    }
+}

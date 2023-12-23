@@ -1,4 +1,6 @@
-This is a program for get zero-shot classification scores from several models at once. 
+This is a program for get zero-shot classification scores from several models at once.
+
+-Minimum python version is 3.6, make sure to install everything in requirements.txt
 
 -Put the data you want to use in a folder in the KeyphraseScorer directory. Make sure all files are .docx, .txt, .md, or .html.
 

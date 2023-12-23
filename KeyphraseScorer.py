@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from transformers import pipeline
 import pandas as pd
 from docx import Document
+import json
 
 device = (
     f"cuda:{torch.cuda.current_device()}" if torch.cuda.is_available() else "cpu"  # noqa: E501
@@ -12,19 +13,18 @@ print(f"Device is {device}")
 
 # Get models
 with open("models.txt", "r") as file:
-    model_names = [model_name.strip() for model_name in file.readlines()]
-
-models = [
-    (
-        model_name,
-        pipeline(
-            "zero-shot-classification",
-            model=model_name,
-            device=0 if device != "cpu" else -1,
-        ),
-    )
-    for model_name in model_names
-]
+    models = [
+        (
+            model_name.strip(),
+            pipeline(
+                "zero-shot-classification",
+                model=model_name.strip(),
+                device=0 if device != "cpu" else -1,
+            ),
+        )
+        for model_name in file.readlines()
+    ]
+assert models, "No models listed in models.txt"
 
 # Get test files
 entries = os.listdir(".")
@@ -32,6 +32,8 @@ subdirectories = set(
     [entry for entry in entries if os.path.isdir(os.path.join(".", entry))]
 )
 known = set(["docs", "ExampleResults", "ExampleHTMLFiles", ".git"])
+assert len(known) > 4, "No directory for input text found."
+assert len(known) < 6, "Too many other directories, program doesn't know which one to use." # noqa: E501
 directory_name = list((subdirectories - known))[0]
 directory_path = os.path.join(".", directory_name)
 
@@ -64,10 +66,12 @@ for filename in os.listdir(directory_path):
             raise ValueError(
                 f"Filetype not supported for {filename}, only .docx, .html, .txt and .md are supported"  # noqa: E501
             )
+assert texts, "Directory was empty, nothing to input"
 
 # Get keyphrases
 with open("keyphrases.txt", "r") as file:
     keyphrases = [keyphrase.strip() for keyphrase in file.readlines()]
+assert keyphrases, "No keyphrases in keyphrases.txt"
 
 # Generate results
 os.makedirs("Results", exist_ok=True)
@@ -80,6 +84,6 @@ for filename, text in texts:
             score = result["scores"][0]
             data[model_name][keyphrase] = score
     df = pd.DataFrame(data)
-    json_data = df.to_json(orient="index")
+    data_dict = df.to_dict(orient="index")
     with open("Results/" + filename + ".json", "w") as file:
-        file.write(json_data)
+        json.dump(data_dict, file, indent=4)
