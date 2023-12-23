@@ -1,0 +1,5 @@
+facebook/bart-large-mnli
+MoritzLaurer/deberta-v3-large-zeroshot-v1.1-all-33
+MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary
+MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7
+MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli
