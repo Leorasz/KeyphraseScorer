@@ -5,7 +5,9 @@ from transformers import pipeline
 import pandas as pd
 from docx import Document
 
-device = f"cuda:{torch.cuda.current_device()}" if torch.cuda.is_available() else "cpu"  # noqa: E501
+device = (
+    f"cuda:{torch.cuda.current_device()}" if torch.cuda.is_available() else "cpu"  # noqa: E501
+)
 print(f"Device is {device}")
 
 # Get models
@@ -25,7 +27,12 @@ models = [
 ]
 
 # Get test files
-directory_name = "SampleHTMLFiles"
+entries = os.listdir(".")
+subdirectories = set(
+    [entry for entry in entries if os.path.isdir(os.path.join(".", entry))]
+)
+known = set(["docs", "ExampleResults", "ExampleHTMLFiles", ".git"])
+directory_name = list((subdirectories - known))[0]
 directory_path = os.path.join(".", directory_name)
 
 texts = []
@@ -68,12 +75,9 @@ for filename, text in texts:
     data = {}
     for model_name, model in models:
         data[model_name] = {}
-        for (
-            keyphrase
-        ) in (
-            keyphrases
-        ):
-            score = model(text, [keyphrase])["scores"][0]
+        for keyphrase in keyphrases:
+            result = model(text, [keyphrase])
+            score = result["scores"][0]
             data[model_name][keyphrase] = score
     df = pd.DataFrame(data)
     json_data = df.to_json(orient="index")
