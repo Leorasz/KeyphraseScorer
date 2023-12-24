@@ -1,14 +1,12 @@
-import torch
 import os
+import json
+import pandas as pd
+from torch import cuda
+from docx import Document
 from bs4 import BeautifulSoup
 from transformers import pipeline
-import pandas as pd
-from docx import Document
-import json
 
-device = (
-    f"cuda:{torch.cuda.current_device()}" if torch.cuda.is_available() else "cpu"  # noqa: E501
-)
+device = f"cuda:{cuda.current_device()}" if cuda.is_available() else "cpu"  # noqa: E501
 print(f"Device is {device}")
 
 # Get models
@@ -33,7 +31,9 @@ subdirectories = set(
 )
 known = set(["docs", "ExampleResults", "ExampleHTMLFiles", ".git"])
 assert len(known) > 4, "No directory for input text found."
-assert len(known) < 6, "Too many other directories, program doesn't know which one to use." # noqa: E501
+assert (
+    len(known) < 6
+), "Too many other directories, program doesn't know which one to use."  # noqa: E501
 directory_name = list((subdirectories - known))[0]
 directory_path = os.path.join(".", directory_name)
 
