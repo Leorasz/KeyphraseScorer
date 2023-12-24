@@ -6,7 +6,7 @@ from docx import Document
 from bs4 import BeautifulSoup
 from transformers import pipeline
 
-device = f"cuda:{cuda.current_device()}" if cuda.is_available() else "cpu"  # noqa: E501
+device = f"cuda:{cuda.current_device()}" if cuda.is_available() else "cpu"
 print(f"Device is {device}")
 
 # Get models
@@ -33,7 +33,7 @@ known = set(["docs", "ExampleResults", "ExampleHTMLFiles", ".git"])
 assert len(known) > 4, "No directory for input text found."
 assert (
     len(known) < 6
-), "Too many other directories, program doesn't know which one to use."  # noqa: E501
+), "Too many other directories, program doesn't know which one to use."
 directory_name = list((subdirectories - known))[0]
 directory_path = os.path.join(".", directory_name)
 
