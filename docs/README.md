@@ -9,3 +9,5 @@ This is a program for get zero-shot classification scores from several models at
 -Specificy which keyphrases to use in the keyphrases.txt file, each on its own line
 
 -Each input file will get its own output json file in the Results folder with the same name with all the model scores for each keyword
+
+Everything one-shot-related is in the One_Shot_Classifier Jupyter notebook.
