@@ -30,42 +30,43 @@ subdirectories = set(
     [entry for entry in entries if os.path.isdir(os.path.join(".", entry))]
 )
 known = set(["docs", "ExampleResults", "ExampleHTMLFiles", ".git"])
-assert len(known) > 4, "No directory for input text found."
+assert len(subdirectories) > 4, "No directory for input text found."
 assert (
-    len(known) < 6
+    len(subdirectories) < 6
 ), "Too many other directories, program doesn't know which one to use."
 directory_name = list((subdirectories - known))[0]
 directory_path = os.path.join(".", directory_name)
 
 texts = []
-for filename in os.listdir(directory_path):
-    file_path = os.path.join(directory_path, filename)
-    if filename.endswith(".docx"):
-        doc = Document(file_path)
-        text = [paragraph.text for paragraph in doc.paragraphs]
-        texts.append((filename[:-5], "\n".join(text)))
-        continue
-    with open(file_path, "r", encoding="utf-8") as file:
-        if filename.endswith(".html"):
-            html_content = file.read()
-            soup = BeautifulSoup(html_content, "html.parser")
-            article_text = " ".join(
-                [
-                    element.get_text(strip=True)
-                    for element in soup.find_all(
-                        ["p", "h1", "h2", "h3", "h4", "h5", "h6"]
-                    )
-                ]
-            )
-            texts.append((filename[:-5], article_text))
-        elif filename.endswith(".txt"):
-            texts.append((filename[:-4], file.read().strip()))
-        elif filename.endswith(".md"):
-            texts.append((filename[:-3], file.read().strip()))
-        else:
-            raise ValueError(
-                f"Filetype not supported for {filename}, only .docx, .html, .txt and .md are supported"  # noqa: E501
-            )
+for dirpath, _, filenames in os.walk(directory_path):
+    for filename in filenames:
+        file_path = os.path.join(dirpath, filename)
+        if filename.endswith(".docx"):
+            doc = Document(file_path)
+            text = [paragraph.text for paragraph in doc.paragraphs]
+            texts.append((filename[:-5], "\n".join(text)))
+            continue
+        with open(file_path, "r", encoding="utf-8") as file:
+            if filename.endswith(".html"):
+                html_content = file.read()
+                soup = BeautifulSoup(html_content, "html.parser")
+                article_text = " ".join(
+                    [
+                        element.get_text(strip=True)
+                        for element in soup.find_all(
+                            ["p", "h1", "h2", "h3", "h4", "h5", "h6"]
+                        )
+                    ]
+                )
+                texts.append((filename[:-5], article_text))
+            elif filename.endswith(".txt"):
+                texts.append((filename[:-4], file.read().strip()))
+            elif filename.endswith(".md"):
+                texts.append((filename[:-3], file.read().strip()))
+            else:
+                raise ValueError(
+                    f"Filetype not supported for {filename}, only .docx, .html, .txt and .md are supported"  # noqa: E501
+                )
 assert texts, "Directory was empty, nothing to input"
 
 # Get keyphrases
