@@ -1,5 +1,6 @@
 import os
 import json
+import logging
 import pandas as pd
 from torch import cuda
 from docx import Document
@@ -9,6 +10,14 @@ from transformers import pipeline
 device = f"cuda:{cuda.current_device()}" if cuda.is_available() else "cpu"
 print(f"Device is {device}")
 
+#Set up error logging
+logging.basicConfig(filename='error_log.log', level=logging.ERROR,
+                    format='%(asctime)s:%(levelname)s:%(message)s')
+
+def logError(error):
+    logging.error(error)
+    raise ValueError(error)
+    
 # Get models
 with open("models.txt", "r") as file:
     models = [
@@ -22,7 +31,7 @@ with open("models.txt", "r") as file:
         )
         for model_name in file.readlines()
     ]
-assert models, "No models listed in models.txt"
+if not models: logError("No models found in models.txt")
 
 # Get test files
 entries = os.listdir(".")
@@ -30,10 +39,8 @@ subdirectories = set(
     [entry for entry in entries if os.path.isdir(os.path.join(".", entry))]
 )
 known = set(["docs", "ExampleResults", "ExampleHTMLFiles", ".git"])
-assert len(subdirectories) > 4, "No directory for input text found."
-assert (
-    len(subdirectories) < 6
-), "Too many other directories, program doesn't know which one to use."
+if len(subdirectories) < 5: logError("No data directory found")
+if len(subdirectories) > 5: logError("Too many directories, don't know which one to use")
 directory_name = list((subdirectories - known))[0]
 directory_path = os.path.join(".", directory_name)
 
@@ -67,12 +74,12 @@ for dirpath, _, filenames in os.walk(directory_path):
                 raise ValueError(
                     f"Filetype not supported for {filename}, only .docx, .html, .txt and .md are supported"  # noqa: E501
                 )
-assert texts, "Directory was empty, nothing to input"
+if not texts: logError("No input data found in the given directory")
 
 # Get keyphrases
 with open("keyphrases.txt", "r") as file:
     keyphrases = [keyphrase.strip() for keyphrase in file.readlines()]
-assert keyphrases, "No keyphrases in keyphrases.txt"
+if not keyphrases: logError("No keyphrases foundin keyphrases.txt")
 
 # Generate results
 os.makedirs("Results", exist_ok=True)
